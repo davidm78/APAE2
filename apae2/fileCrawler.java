@@ -9,12 +9,6 @@ public class fileCrawler {
 	//this code is shit
 	public static void main(String[] args){
 		
-		LinkedList<Object> ll;
-		TreeSet<?> ts;
-		Iterator<?> it;
-		char sp;
-		char pattern;
-
 		if (args.length < 2){
 			System.out.println("Not enough arguments");
 			System.exit(-1);
