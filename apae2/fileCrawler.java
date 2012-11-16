@@ -6,6 +6,7 @@ import java.util.regex.*;
 public class fileCrawler {
 	
 	//comment
+	//this code is shit
 	public static void main(String[] args){
 		
 		LinkedList<Object> ll;
