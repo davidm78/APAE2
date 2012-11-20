@@ -1,28 +1,47 @@
-import java.util.LinkedList;
-import java.util.Iterator;
-import java.util.TreeSet;
-import java.util.regex.*;
+import java.io.File;
 import java.util.concurrent.*;
+import java.util.regex.*;
 
 public class fileCrawler {
 	
-	//comment
-	//this code is shit
 	public static void main(String[] args){
 		
-		if (args.length < 2){
+		if (args.length < 1){
 			System.out.println("Not enough arguments");
 			System.exit(-1);
 		}
 		
-		System.out.println(cvtPattern(args[0]));
-		
+		String pattern = Regex.cvtPattern(args[0]);
 		DirectoryTree dt = new DirectoryTree();
+		LinkedBlockingQueue<File> workQueue = new LinkedBlockingQueue<File>();
+		ConcurrentSkipListSet<File> anotherStructure = new ConcurrentSkipListSet<File>();
 		
 		if(args.length == 1){
-			dt.processDirectory(".");
+			dt.processDirectory(".", workQueue);
 		} else {
-			dt.processDirectory(args[1]);
+			for (int i = 1; i < args.length; i++){
+				dt.processDirectory(args[i], workQueue);
+			}
+		}
+		
+		Pattern p = Pattern.compile(pattern);
+
+		for (File file: workQueue){
+				File[] entries = file.listFiles();
+				for (File entry: entries){
+					if (entry.isFile()){
+						Matcher m = p.matcher(entry.toString());
+						if (m.matches()){
+							anotherStructure.add(entry);
+					}
+				}
+			}
+			}
+		
+		
+		
+		for (File file: anotherStructure){
+			System.out.println(file.toString());
 		}
 	}
 		
