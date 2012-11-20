@@ -9,7 +9,7 @@ public class DirectoryTree {
 			if (file.isDirectory()){
 				String entries[] = file.list();
 					if (entries != null){
-			             workQueue.add(file);
+						workQueue.add(file);
 						for (String entry : entries){
 								if(entry.compareTo(".") == 0)
 									continue;

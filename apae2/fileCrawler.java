@@ -30,7 +30,7 @@ public class fileCrawler {
 				File[] entries = file.listFiles();
 				for (File entry: entries){
 					if (entry.isFile()){
-						Matcher m = p.matcher(entry.toString());
+						Matcher m = p.matcher(entry.getName());
 						if (m.matches()){
 							anotherStructure.add(entry);
 					}
@@ -65,7 +65,7 @@ public class fileCrawler {
 			pat.append('^');
 			if (str.charAt(0) == '\''){
 				start = 1;
-				length = str.length();
+				length = str.length() - 1;
 			} else {
 				start = 0;
 				length = str.length();
